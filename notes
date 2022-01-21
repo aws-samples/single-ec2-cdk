@@ -1,0 +1,13 @@
+pubkey="$HOME/.ssh/aws_2020_id_rsa.pub"
+echo "sending public key to ${instanceId}"
+aws ec2-instance-connect send-ssh-public-key --instance-id ${instanceId} --instance-os-user ec2-user \
+--ssh-public-key file://${pubkey} --availability-zone ${az} 
+
+
+https://github.com/pahud/cdk-spot-one
+
+hybernate https://aws.amazon.com/blogs/aws/new-hibernate-your-ec2-instances/
+
+lambda to stop https://github.com/michimani/auto-start-stop-ec2
+
+CDK to add a larger userdata script: https://dev.to/aws-builders/aws-cdk-coding-a-virtual-machine-in-the-cloud-9de

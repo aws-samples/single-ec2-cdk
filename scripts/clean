@@ -1,0 +1,10 @@
+echo "cleaning up..."
+rm -Rf *~
+rm -Rf cdk-outputs.json
+rm -Rf lib/*.js lib/*.d.ts
+rm -Rf test/*.js test/*.d.ts
+rm -Rf package-lock.json yarn.lock
+rm -Rf src/*~ lib/*~ test/*~ userdata/*~ scripts/*~ configs/*~
+echo "removing node_modules, this takes a moment..."
+rm -Rf node_modules
+echo "all done!"

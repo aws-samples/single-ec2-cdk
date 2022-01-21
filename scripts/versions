@@ -1,0 +1,7 @@
+set -x
+npm -v
+node -v
+aws --version
+cdk --version
+npm list --depth=0
+

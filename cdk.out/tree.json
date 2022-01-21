@@ -1,0 +1,274 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "@aws-cdk/core.Construct",
+          "version": "1.137.0"
+        }
+      },
+      "SingleEc2Stack": {
+        "id": "SingleEc2Stack",
+        "path": "SingleEc2Stack",
+        "children": {
+          "VPC": {
+            "id": "VPC",
+            "path": "SingleEc2Stack/VPC",
+            "children": {
+              "PublicSubnet1": {
+                "id": "PublicSubnet1",
+                "path": "SingleEc2Stack/VPC/PublicSubnet1",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Resource",
+                  "version": "1.137.0"
+                }
+              },
+              "PublicSubnet2": {
+                "id": "PublicSubnet2",
+                "path": "SingleEc2Stack/VPC/PublicSubnet2",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Resource",
+                  "version": "1.137.0"
+                }
+              },
+              "PublicSubnet3": {
+                "id": "PublicSubnet3",
+                "path": "SingleEc2Stack/VPC/PublicSubnet3",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Resource",
+                  "version": "1.137.0"
+                }
+              },
+              "PublicSubnet4": {
+                "id": "PublicSubnet4",
+                "path": "SingleEc2Stack/VPC/PublicSubnet4",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Resource",
+                  "version": "1.137.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Resource",
+              "version": "1.137.0"
+            }
+          },
+          "gherlein-dev-role": {
+            "id": "gherlein-dev-role",
+            "path": "SingleEc2Stack/gherlein-dev-role",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "SingleEc2Stack/gherlein-dev-role/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "ec2.amazonaws.com"
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.CfnRole",
+                  "version": "1.137.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-iam.Role",
+              "version": "1.137.0"
+            }
+          },
+          "gherlein-devsg": {
+            "id": "gherlein-devsg",
+            "path": "SingleEc2Stack/gherlein-devsg",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "SingleEc2Stack/gherlein-devsg/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "SingleEc2Stack/gherlein-devsg",
+                    "groupName": "gherlein-dev-sg",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Allow all outbound traffic by default",
+                        "ipProtocol": "-1"
+                      }
+                    ],
+                    "securityGroupIngress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "ipProtocol": "tcp",
+                        "fromPort": 22,
+                        "toPort": 22,
+                        "description": "from 0.0.0.0/0:22"
+                      },
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "ipProtocol": "tcp",
+                        "fromPort": 80,
+                        "toPort": 80,
+                        "description": "from 0.0.0.0/0:80"
+                      },
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "ipProtocol": "tcp",
+                        "fromPort": 443,
+                        "toPort": 443,
+                        "description": "from 0.0.0.0/0:443"
+                      }
+                    ],
+                    "vpcId": "vpc-34c1924c"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-ec2.CfnSecurityGroup",
+                  "version": "1.137.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-ec2.SecurityGroup",
+              "version": "1.137.0"
+            }
+          },
+          "gherlein-dev": {
+            "id": "gherlein-dev",
+            "path": "SingleEc2Stack/gherlein-dev",
+            "children": {
+              "InstanceProfile": {
+                "id": "InstanceProfile",
+                "path": "SingleEc2Stack/gherlein-dev/InstanceProfile",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::InstanceProfile",
+                  "aws:cdk:cloudformation:props": {
+                    "roles": [
+                      {
+                        "Ref": "gherleindevrole08982ACD"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.CfnInstanceProfile",
+                  "version": "1.137.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "SingleEc2Stack/gherlein-dev/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::Instance",
+                  "aws:cdk:cloudformation:props": {
+                    "availabilityZone": "us-west-2a",
+                    "iamInstanceProfile": {
+                      "Ref": "gherleindevInstanceProfileA43B603F"
+                    },
+                    "imageId": {
+                      "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+                    },
+                    "instanceType": "t2.micro",
+                    "keyName": "gherlein-ec2",
+                    "securityGroupIds": [
+                      {
+                        "Fn::GetAtt": [
+                          "gherleindevsg28F9A818",
+                          "GroupId"
+                        ]
+                      }
+                    ],
+                    "subnetId": "subnet-b342eecb",
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "gherlein-dev"
+                      }
+                    ],
+                    "userData": {
+                      "Fn::Base64": "#!/bin/bash\n#! /bin/bash\nsudo yum -y update\nsudo yum -y install expect emacs-nox jq\ncurl \"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip\" -o \"awscliv2.zip\"\nunzip awscliv2.zip\nsudo ./aws/install\nrm -Rf aws\ncurl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash\ncat << EOF >> $HOME/.bash_profile\nexport NVM_DIR=\"$HOME/.nvm\"\n[ -s \"$NVM_DIR/nvm.sh\" ] && \\. \"$NVM_DIR/nvm.sh\"  # This loads nvm\n[ -s \"$NVM_DIR/bash_completion\" ] && \\. \"$NVM_DIR/bash_completion\"\nEOF\nsource $HOME/.bash_profile\nnvm install 16\nnvm use 16\nnpm install -g npm nodejs typescript aws-sdk aws-cdk\n\n\n"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-ec2.CfnInstance",
+                  "version": "1.137.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-ec2.Instance",
+              "version": "1.137.0"
+            }
+          },
+          "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter": {
+            "id": "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter",
+            "path": "SingleEc2Stack/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnParameter",
+              "version": "1.137.0"
+            }
+          },
+          "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118": {
+            "id": "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118",
+            "path": "SingleEc2Stack/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Resource",
+              "version": "1.137.0"
+            }
+          },
+          "ec2-instance-ip-address": {
+            "id": "ec2-instance-ip-address",
+            "path": "SingleEc2Stack/ec2-instance-ip-address",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnOutput",
+              "version": "1.137.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "SingleEc2Stack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "SingleEc2Stack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnResource",
+                  "version": "1.137.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Construct",
+              "version": "1.137.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "@aws-cdk/core.Stack",
+          "version": "1.137.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "@aws-cdk/core.App",
+      "version": "1.137.0"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+useradd username
+usermod -G wheel username
+# change to allow sudo in the install scripts
+echo "username ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers 
+su -c 'cd ~username;git clone https://github.com/username/examplerepo' username
+su -c 'cd ~username/examplerepo;./install' username
+# change it back for safety later
+sed -i.bak '/username/d' /etc/sudoers
+
+

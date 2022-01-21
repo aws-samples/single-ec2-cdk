@@ -1,0 +1,7 @@
+CONFIG=./configs/config.json
+CDKOUT=./cdk-outputs.json
+INSTANCEID=`jq -r .[].ec2instanceid $CDKOUT`
+KEYFILE=`jq -r .keyFile $CONFIG`
+IP_ADDRESS=`aws ec2 describe-instances --filters "Name=instance-id,Values=$INSTANCEID" | jq -r .Reservations[].Instances[].NetworkInterfaces[].Association.PublicIp`
+ssh -i $KEYFILE ec2-user@$IP_ADDRESS
+

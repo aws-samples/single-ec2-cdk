@@ -1,0 +1,14 @@
+CONFIG=./configs/config.json
+AWSCREDSVAR=`jq -r .awsConfig $CONFIG`
+AWSCREDS="${AWSCREDSVAR//\~/$HOME}"
+TARGET=`jq -r .nickName $CONFIG`":"
+echo $AWSCREDS $TARGET
+if [ $AWSCREDS == "" ]; then
+    echo "copying credentials is disabled - please set awsConfig in configs/config.json"
+    exit -1
+fi
+scp -r "$AWSCREDSVAR" $TARGET
+scp -r "$AWSCREDS" $TARGET
+
+
+

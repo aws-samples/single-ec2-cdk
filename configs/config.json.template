@@ -1,0 +1,15 @@
+{
+    "stackName": "<unique name for your stack (per region)",
+    "ec2Name": "<hostname for your EC2 instance, will be set in DNS",
+    "nickName": "<the name you want to show up in VS Code lists, or to use at the SSH command line>",
+    "ec2Class": "<class of EC2 instance, for example t3>",
+    "ec2Size": "<size of EC2 instance, for example nano/micro/small/medium/large/2xlarge",
+    "keyName": "<name of the EC2 key to be used>",
+    "keyFile": "<filename for the EC2 key pem file>",
+    "hostedZoneID": "<hosted zone id from Route53 - leave emptty to disable>",
+    "domainName": "<domain name associated with that hosted zone", 
+    "userDataFile": "<additional script to be appended to and run on EC2 creation - 'peruser-example' file is an example>",
+    "cdkOut": "cdk-outputs.json",
+    "timeBomb": "0",
+    "awsConfig": "~/.aws"
+}

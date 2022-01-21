@@ -1,0 +1,14 @@
+KEYVAR=`jq -r .keyFile configs/config.json`
+KEYFILE="${KEYVAR//\~/$HOME}"
+PUB=$KEYFILE.pub
+ssh-keygen -y -f $KEYFILE > $PUB
+TARGET=`jq -r .nickName configs/config.json`:.ssh/
+echo ""
+echo "copying $KEYFILE and $PUB to $TARGET"
+scp $KEYFILE $TARGET
+scp $PUB $TARGET
+
+
+
+
+

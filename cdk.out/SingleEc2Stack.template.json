@@ -1,0 +1,141 @@
+{
+  "Resources": {
+    "gherleindevrole08982ACD": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "SingleEc2Stack/gherlein-dev-role/Resource"
+      }
+    },
+    "gherleindevsg28F9A818": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "SingleEc2Stack/gherlein-devsg",
+        "GroupName": "gherlein-dev-sg",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1"
+          }
+        ],
+        "SecurityGroupIngress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "from 0.0.0.0/0:22",
+            "FromPort": 22,
+            "IpProtocol": "tcp",
+            "ToPort": 22
+          },
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "from 0.0.0.0/0:80",
+            "FromPort": 80,
+            "IpProtocol": "tcp",
+            "ToPort": 80
+          },
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "from 0.0.0.0/0:443",
+            "FromPort": 443,
+            "IpProtocol": "tcp",
+            "ToPort": 443
+          }
+        ],
+        "VpcId": "vpc-34c1924c"
+      },
+      "Metadata": {
+        "aws:cdk:path": "SingleEc2Stack/gherlein-devsg/Resource"
+      }
+    },
+    "gherleindevInstanceProfileA43B603F": {
+      "Type": "AWS::IAM::InstanceProfile",
+      "Properties": {
+        "Roles": [
+          {
+            "Ref": "gherleindevrole08982ACD"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "SingleEc2Stack/gherlein-dev/InstanceProfile"
+      }
+    },
+    "gherleindev8B80C16C": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "AvailabilityZone": "us-west-2a",
+        "IamInstanceProfile": {
+          "Ref": "gherleindevInstanceProfileA43B603F"
+        },
+        "ImageId": {
+          "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+        },
+        "InstanceType": "t2.micro",
+        "KeyName": "gherlein-ec2",
+        "SecurityGroupIds": [
+          {
+            "Fn::GetAtt": [
+              "gherleindevsg28F9A818",
+              "GroupId"
+            ]
+          }
+        ],
+        "SubnetId": "subnet-b342eecb",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "gherlein-dev"
+          }
+        ],
+        "UserData": {
+          "Fn::Base64": "#!/bin/bash\n#! /bin/bash\nsudo yum -y update\nsudo yum -y install expect emacs-nox jq\ncurl \"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip\" -o \"awscliv2.zip\"\nunzip awscliv2.zip\nsudo ./aws/install\nrm -Rf aws\ncurl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash\ncat << EOF >> $HOME/.bash_profile\nexport NVM_DIR=\"$HOME/.nvm\"\n[ -s \"$NVM_DIR/nvm.sh\" ] && \\. \"$NVM_DIR/nvm.sh\"  # This loads nvm\n[ -s \"$NVM_DIR/bash_completion\" ] && \\. \"$NVM_DIR/bash_completion\"\nEOF\nsource $HOME/.bash_profile\nnvm install 16\nnvm use 16\nnpm install -g npm nodejs typescript aws-sdk aws-cdk\n\n\n"
+        }
+      },
+      "DependsOn": [
+        "gherleindevrole08982ACD"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "SingleEc2Stack/gherlein-dev/Resource"
+      }
+    },
+    "CDKMetadata": {
+      "Type": "AWS::CDK::Metadata",
+      "Properties": {
+        "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WPzQrCMBCEn6X3NLUKehV6EE+W+gRhu4X0JymbjSIh726iFPQ07PDNLFPL+nCSu+Ksnq6EfqoCWEIZ7qxgEh066wlQNINpFakFGSkfN8+rZ9FY45g8cPY2OIrcFbRaZOjs/Alvek28MoAt2UHPCUXYp2cInjS/LmT9mrF/Ywv9FsQYhbE9ytFVj/qYVsi6GJ3WJXnDekHZffUN9rgdeeEAAAA="
+      },
+      "Metadata": {
+        "aws:cdk:path": "SingleEc2Stack/CDKMetadata/Default"
+      }
+    }
+  },
+  "Parameters": {
+    "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter": {
+      "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+      "Default": "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
+    }
+  },
+  "Outputs": {
+    "ec2instanceipaddress": {
+      "Value": {
+        "Fn::GetAtt": [
+          "gherleindev8B80C16C",
+          "PublicIp"
+        ]
+      }
+    }
+  }
+}

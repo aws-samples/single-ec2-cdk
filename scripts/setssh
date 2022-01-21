@@ -1,0 +1,39 @@
+CDKOUT=./cdk-outputs.json
+INSTANCEID=`jq -r .[].ec2instanceid $CDKOUT`
+if [ -z $INSTANCEID ]; then
+    echo "no running instance $INSTANCEID found"
+    exit
+else
+    echo "instance $INSTANCEID is running"    
+fi    
+IP_ADDRESS=`aws ec2 describe-instances --filters "Name=instance-id,Values=$INSTANCEID" | jq -r .Reservations[].Instances[].NetworkInterfaces[].Association.PublicIp`
+KEYFILE=`jq -r .keyFile configs/config.json`
+NICKNAME=`jq -r .nickName configs/config.json`
+EC2NAME=`jq -r .ec2Name configs/config.json`
+DOMAIN=`aws route53 get-hosted-zone --id Z00609272L7MZI1OMD0IL | jq -r .HostedZone.Name | sed 's/\.$//'`
+FQDN=$EC2NAME.$DOMAIN
+echo "alias IP address: $IP_ADDRESS"
+echo "ec2 hostname $EC2NAME" 
+echo "ssh nickname: $NICKNAME"
+echo "ssh keyFile: $KEYFILE"
+echo "FQDN:" $FQDN
+cp ~/.ssh/config ~/.ssh/config.bak
+OLDALIAS=`ssh -G $NICKNAME |grep ^hostname | sed -n -e 's/hostname //p' | xargs` # xargs strips spaces (neat hack)
+echo "oldAlias: " $OLDALIAS
+EXISTS=`grep $NICKNAME ~/.ssh/config | sed -n -e 's/Host //p' | xargs` # xargs strips spaces (neat hack)
+echo "Existing host: " $EXISTS
+if [[ $EXISTS == $NICKNAME ]]; then
+    echo "Host $EXISTS record exists"
+    sed -i -e "s/$OLDALIAS/$IP_ADDRESS/g" ~/.ssh/config 
+    ssh-keygen -R $OLDALIAS
+    ssh-keygen -R $FQDN
+else
+cat << EOF >> ~/.ssh/config
+Host $NICKNAME
+    HostName $IP_ADDRESS
+    IdentityFile $KEYFILE
+
+EOF
+fi
+echo "new ~/.ssh/config file:"
+cat ~/.ssh/config

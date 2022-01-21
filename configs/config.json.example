@@ -1,0 +1,15 @@
+{
+    "stackName": "SingleEc2Stack-dev",
+    "ec2Name": "dev",
+    "nickName": "dev",
+    "ec2Class": "t3",
+    "ec2Size": "micro",
+    "keyName": "<set yourself>",
+    "keyFile": "<set yourself>",
+    "hostedZoneID": "<set from your own Route53 if you also want DNS, or empty>",
+    "domainName": "<set from your own Route53 if you also want DNS, or empty>",
+    "userDataFile": "<point to any file that you want to append to the userdata script",
+    "cdkOut": "cdk-outputs.json",
+    "timeBomb": "0",
+    "awsConfig": "~/.aws by default"
+}
