@@ -1,7 +1,7 @@
 # Single EC2 CDK Script
 
 This is a simple CDK project that creates a single EC2 instance and copies a common set of tools needed for doing cloud development.  This script handles the undifferentiated heavy lifting of creating a development environment.  While other methods
-exist that give similar results ([Cloud9](https://aws.amazon.com/cloud9/) and  [https://www.amazonaws.cn/en/workspaces/](Amazon Workspaces)) neither of those automatically installs the entire development environment and pre-configures it for access with a remote editor.  This solution fully automates the creation of your entire development environment.  This makes it fully repeatable: you can dispose of and re-create your development environment on demand in minutes.
+exist that give similar results from [Cloud9](https://aws.amazon.com/cloud9/) and  [https://www.amazonaws.cn/en/workspaces/](Amazon Workspaces), neither of those automatically installs the entire development environment and pre-configures it for access with a remote editor.  This solution fully automates the creation of your entire development environment.  This solution makes creation of a new EC2 easy and fully repeatable: you can dispose of and re-create your development environment on demand.
 
 The example config (in 'configs/config.json.example') defaults a t3 micro and installs a userdata script at userdata/user_script.sh.  You can add user-specific commands to that by adding a pointer to another file.  
 
