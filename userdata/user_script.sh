@@ -51,7 +51,7 @@ MY_IP=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4/)
 DOMAIN=`aws ec2 describe-tags --filters "Name=resource-id,Values=$INSTANCE_ID" "Name=key,Values=domainName" | jq -r .Tags[].Value`
 HOST=`aws ec2 describe-tags --filters "Name=resource-id,Values=$INSTANCE_ID" "Name=key,Values=nickName" | jq -r .Tags[].Value`
 FQDN=$HOST.$DOMAIN
-/usr/local/bin/aws route53 change-resource-record-sets --hosted-zone-id Z00609272L7MZI1OMD0IL --change-batch '{
+/usr/local/bin/aws route53 change-resource-record-sets --hosted-zone-id ZONE_ID --change-batch '{
     "Changes":[{
         "Action":"UPSERT",
         "ResourceRecordSet":{

@@ -166,7 +166,6 @@ export class SingleEc2Stack extends cdk.Stack {
       const zoneName = verifyHostedZone(config.hostedZoneID, config.ec2Name);
       if (zoneName) {
         localUserData = localUserData.replace("ZONE_ID", config.hostedZoneID);
-        localUserData = localUserData.replace("ZONE_NAME", config.ec2Name + zoneName);
       } else {
         console.log("DNS name not set due to error obtaining hosted zone information");
       }
