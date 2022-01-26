@@ -44,6 +44,11 @@ You can easily expand what is installed by writing a script and setting the user
 [Cloud9](https://aws.amazon.com/cloud9/) is a great tool.  So is [https://www.amazonaws.cn/en/workspaces/](Amazon Workspaces).  However, some customers prefer to use tools like Visual Studio Code, or to ssh to a host and use command line tools.  Or they want to easily change
 the IAM permissions for the host.  Or most importantly, they want to create a "clean" new development environment to start a new project, or to test that their code will work properly on a clean new environment.  Netiher Cloud9 nor the Amazon Workspaces make that easy to do. 
 
+## Security Improvements
+
+This script opens port 22 so that you can ssh to the host, from anywhere by default.  You may want to limit the IP addresses that can connect inbound.  You can read about [SSH best practices](https://aws.amazon.com/premiumsupport/knowledge-center/ec2-ssh-best-practices/).
+
+
 ## Using this Solution with Visual Studio Code
 
 Visual Studio Code has an extension that makes it easy to [do remote development over ssh](https://code.visualstudio.com/docs/remote/ssh).  This tool will automatically add information to the SSH config file for the created EC2 server.  You can open VS Code and immediately
