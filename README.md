@@ -17,6 +17,8 @@ you want to follow the steps in an AWS blog or workshop and you want to make sur
 The challenge of just starting an EC2 server is the initial installation and configuration of basic tools.  This project enables full automation of that.  The default userdata script installs the most up to date AWS CLI and a common set of tools.  You can easily extend that
 script to create users and install softare in that users home directory.  Please see 'userdata/example' for a template.  Both of these are easily extensible.  A full description of this is included below.
 
+Please note that if you just need a development machine at a low cost, or, you want/need to have a very strong security posture, it is possible to run an EC2 instance without a public IP address and connect only over Amazon System Manager (SSM).  [Here is a good blog about it](https://pub.towardsai.net/how-to-do-remote-development-with-vs-code-using-aws-ssm-415881d249f3).  This tool could be modified to support that.  This tool does set the IAM policy to enable the use of SSM.  However, this tool assumes that you want/need to be able to connect to the host over the internet.
+
 ## Cloning This Repo
 
 We assume you will "use this template" to create a new GitHub repository with your own name.  You can then edit your configuration (see below) and track your changes in git as well, and customize the scripts as needed for your own use.

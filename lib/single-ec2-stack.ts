@@ -74,10 +74,28 @@ export class SingleEc2Stack extends cdk.Stack {
         }),
       ],
     });
-    const dnsPolicy = new iam.Policy(this, 'dnsPollicy', {
+    const dnsPolicy = new iam.Policy(this, 'dnsPolicy', {
       document: dnsPolicyDoc
     });
     role.attachInlinePolicy(dnsPolicy);
+
+    const ssmPolicyDoc = new iam.PolicyDocument({
+      statements: [
+        new iam.PolicyStatement({
+          effect: iam.Effect.ALLOW,
+          actions: ["ssm:UpdateInstanceInformation",
+            "ssmmessages:CreateControlChannel",
+            "ssmmessages:CreateDataChannel",
+            "ssmmessages:OpenControlChannel",
+            "ssmmessages:OpenDataChannel"],
+          resources: ["*"],
+        }),
+      ],
+    });
+    const ssmPolicy = new iam.Policy(this, 'ssmPolicy', {
+      document: ssmPolicyDoc
+    });
+    role.attachInlinePolicy(ssmPolicy);
 
     const securityGroup = new ec2.SecurityGroup(this, config.ec2Name + 'sg',
       {
@@ -120,7 +138,13 @@ export class SingleEc2Stack extends cdk.Stack {
         generation: ec2.AmazonLinuxGeneration.AMAZON_LINUX_2,
       }),
       keyName: config.keyName,
-    })
+      blockDevices: [
+        {
+          deviceName: '/dev/xvda',
+          volume: ec2.BlockDeviceVolume.ebs(100),
+        },
+      ],
+    });
 
     const arn: string = "arn:aws:ec2:" + process.env.CDK_DEFAULT_REGION + ":" + process.env.CDK_DEFAULT_ACCOUNT + ":instance/" + instance.instanceId;
     const tagPolicyDoc = new iam.PolicyDocument({
@@ -166,6 +190,7 @@ export class SingleEc2Stack extends cdk.Stack {
       const zoneName = verifyHostedZone(config.hostedZoneID, config.ec2Name);
       if (zoneName) {
         localUserData = localUserData.replace("ZONE_ID", config.hostedZoneID);
+        localUserData = localUserData.replace("ZONE_NAME", config.ec2Name + zoneName);
       } else {
         console.log("DNS name not set due to error obtaining hosted zone information");
       }
