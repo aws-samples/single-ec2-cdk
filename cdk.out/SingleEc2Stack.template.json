@@ -1,6 +1,6 @@
 {
   "Resources": {
-    "gherleindevrole08982ACD": {
+    "devrole61AE7F72": {
       "Type": "AWS::IAM::Role",
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -17,14 +17,78 @@
         }
       },
       "Metadata": {
-        "aws:cdk:path": "SingleEc2Stack/gherlein-dev-role/Resource"
+        "aws:cdk:path": "SingleEc2Stack/dev-role/Resource"
       }
     },
-    "gherleindevsg28F9A818": {
+    "dnsPolicy90BE57CE": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "route53:GetChange",
+              "Effect": "Allow",
+              "Resource": "arn:aws:route53:::hostedzone/Z00609272L7MZI1OMD0IL"
+            },
+            {
+              "Action": "route53:ChangeResourceRecordSets",
+              "Effect": "Allow",
+              "Resource": "arn:aws:route53:::hostedzone/Z00609272L7MZI1OMD0IL"
+            },
+            {
+              "Action": "route53:GetHostedZone",
+              "Effect": "Allow",
+              "Resource": "arn:aws:route53:::hostedzone/Z00609272L7MZI1OMD0IL"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "dnsPolicy90BE57CE",
+        "Roles": [
+          {
+            "Ref": "devrole61AE7F72"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "SingleEc2Stack/dnsPolicy/Resource"
+      }
+    },
+    "ssmPolicy178E7BD0": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ssm:UpdateInstanceInformation",
+                "ssmmessages:CreateControlChannel",
+                "ssmmessages:CreateDataChannel",
+                "ssmmessages:OpenControlChannel",
+                "ssmmessages:OpenDataChannel"
+              ],
+              "Effect": "Allow",
+              "Resource": "*"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "ssmPolicy178E7BD0",
+        "Roles": [
+          {
+            "Ref": "devrole61AE7F72"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "SingleEc2Stack/ssmPolicy/Resource"
+      }
+    },
+    "devsg25C5920B": {
       "Type": "AWS::EC2::SecurityGroup",
       "Properties": {
-        "GroupDescription": "SingleEc2Stack/gherlein-devsg",
-        "GroupName": "gherlein-dev-sg",
+        "GroupDescription": "SingleEc2Stack/devsg",
+        "GroupName": "dev-sg",
         "SecurityGroupEgress": [
           {
             "CidrIp": "0.0.0.0/0",
@@ -39,57 +103,51 @@
             "FromPort": 22,
             "IpProtocol": "tcp",
             "ToPort": 22
-          },
-          {
-            "CidrIp": "0.0.0.0/0",
-            "Description": "from 0.0.0.0/0:80",
-            "FromPort": 80,
-            "IpProtocol": "tcp",
-            "ToPort": 80
-          },
-          {
-            "CidrIp": "0.0.0.0/0",
-            "Description": "from 0.0.0.0/0:443",
-            "FromPort": 443,
-            "IpProtocol": "tcp",
-            "ToPort": 443
           }
         ],
         "VpcId": "vpc-34c1924c"
       },
       "Metadata": {
-        "aws:cdk:path": "SingleEc2Stack/gherlein-devsg/Resource"
+        "aws:cdk:path": "SingleEc2Stack/devsg/Resource"
       }
     },
-    "gherleindevInstanceProfileA43B603F": {
+    "devInstanceProfile2C058DB1": {
       "Type": "AWS::IAM::InstanceProfile",
       "Properties": {
         "Roles": [
           {
-            "Ref": "gherleindevrole08982ACD"
+            "Ref": "devrole61AE7F72"
           }
         ]
       },
       "Metadata": {
-        "aws:cdk:path": "SingleEc2Stack/gherlein-dev/InstanceProfile"
+        "aws:cdk:path": "SingleEc2Stack/dev/InstanceProfile"
       }
     },
-    "gherleindev8B80C16C": {
+    "devF7B884FF": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
         "AvailabilityZone": "us-west-2a",
+        "BlockDeviceMappings": [
+          {
+            "DeviceName": "/dev/xvda",
+            "Ebs": {
+              "VolumeSize": 100
+            }
+          }
+        ],
         "IamInstanceProfile": {
-          "Ref": "gherleindevInstanceProfileA43B603F"
+          "Ref": "devInstanceProfile2C058DB1"
         },
         "ImageId": {
           "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
         },
-        "InstanceType": "t2.micro",
+        "InstanceType": "t3.2xlarge",
         "KeyName": "gherlein-ec2",
         "SecurityGroupIds": [
           {
             "Fn::GetAtt": [
-              "gherleindevsg28F9A818",
+              "devsg25C5920B",
               "GroupId"
             ]
           }
@@ -97,25 +155,87 @@
         "SubnetId": "subnet-b342eecb",
         "Tags": [
           {
+            "Key": "domainName",
+            "Value": "herlein.dev"
+          },
+          {
+            "Key": "ec2Name",
+            "Value": "dev"
+          },
+          {
+            "Key": "hostedZoneID",
+            "Value": "Z00609272L7MZI1OMD0IL"
+          },
+          {
+            "Key": "keyFile",
+            "Value": "~/keys/gherlein-ec2.pem"
+          },
+          {
+            "Key": "keyName",
+            "Value": "gherlein-ec2"
+          },
+          {
             "Key": "Name",
-            "Value": "gherlein-dev"
+            "Value": "dev"
+          },
+          {
+            "Key": "nickName",
+            "Value": "dev"
+          },
+          {
+            "Key": "timeBomb",
+            "Value": "0"
           }
         ],
         "UserData": {
-          "Fn::Base64": "#!/bin/bash\n#! /bin/bash\nsudo yum -y update\nsudo yum -y install expect emacs-nox jq\ncurl \"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip\" -o \"awscliv2.zip\"\nunzip awscliv2.zip\nsudo ./aws/install\nrm -Rf aws\ncurl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash\ncat << EOF >> $HOME/.bash_profile\nexport NVM_DIR=\"$HOME/.nvm\"\n[ -s \"$NVM_DIR/nvm.sh\" ] && \\. \"$NVM_DIR/nvm.sh\"  # This loads nvm\n[ -s \"$NVM_DIR/bash_completion\" ] && \\. \"$NVM_DIR/bash_completion\"\nEOF\nsource $HOME/.bash_profile\nnvm install 16\nnvm use 16\nnpm install -g npm nodejs typescript aws-sdk aws-cdk\n\n\n"
+          "Fn::Base64": "#!/bin/bash\n#! /bin/bash -x\n# install critial tools\nsudo yum -y update\nsudo yum remove -y awscli # remove v1 to make way to install v2\nsudo yum -y install expect jq curl git\n# install AWS CLI\nwget \"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip\" -O \"awscliv2.zip\"\nunzip awscliv2.zip\nsudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update\nrm -Rf aws awscliv2.zip\n# install SAM\nwget https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip -O sam.zip\nunzip sam.zip  -d sam-installation\nsudo ./sam-installation/install\nsam --version\nrm -Rf ./sam-installation sam.zip\n# install NVM\nexport HOME=/usr/local/bin\ncd /usr/local/bin\ncurl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash\ncat << \"EOF\" >> /etc/profile\nNVM_DIR=/usr/local/bin/.nvm\n[ -s \"$NVM_DIR/nvm.sh\" ] && \\. \"$NVM_DIR/nvm.sh\"  # This loads nvm\n[ -s \"$NVM_DIR/bash_completion\" ] && \\. \"$NVM_DIR/bash_completion\"\nfor i in $(ls $HOME/.ssh/*.pem);\ndo\n    [ -f \"$i\" ] || break\n    ssh-add $i\ndone\nEOF\nsource /etc/profile\nsource $NVM_DIR/nvm.sh\nnvm install 16\nnvm use 16\nnpm install -g npm nodejs typescript aws-sdk aws-cdk yarn\nexport HOME=/root\n# set local variables\nINSTANCE_ID=$(wget -qO- http://instance-data/latest/meta-data/instance-id)\nHOST=`aws ec2 describe-tags --filters \"Name=resource-id,Values=$INSTANCE_ID\" \"Name=key,Values=nickName\" | jq -r .Tags[].Value`\nDOMAIN=`aws ec2 describe-tags --filters \"Name=resource-id,Values=$INSTANCE_ID\" \"Name=key,Values=domainName\" | jq -r .Tags[].Value`\necho \"preserve_hostname: true\" >> /etc/cloud/cloud.cfg\nhostnamectl set-hostname $HOST.$DOMAIN\necho \"ssh-add $KEYFILE\" >> /etc/profile\n# configure DNS\ntouch /var/lib/cloud/scripts/per-boot/set-dns\nchmod +x /var/lib/cloud/scripts/per-boot/set-dns\ncat << \"EOF\" > /var/lib/cloud/scripts/per-boot/set-dns\n#!/bin/bash\nINSTANCE_ID=$(wget -qO- http://instance-data/latest/meta-data/instance-id)\nMY_IP=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4/)\nDOMAIN=`aws ec2 describe-tags --filters \"Name=resource-id,Values=$INSTANCE_ID\" \"Name=key,Values=domainName\" | jq -r .Tags[].Value`\nHOST=`aws ec2 describe-tags --filters \"Name=resource-id,Values=$INSTANCE_ID\" \"Name=key,Values=nickName\" | jq -r .Tags[].Value`\nFQDN=$HOST.$DOMAIN\n/usr/local/bin/aws route53 change-resource-record-sets --hosted-zone-id Z00609272L7MZI1OMD0IL --change-batch '{\n    \"Changes\":[{\n        \"Action\":\"UPSERT\",\n        \"ResourceRecordSet\":{\n            \"Name\": \"'$FQDN'\",\n            \"Type\":\"A\",\n            \"TTL\":10,\n            \"ResourceRecords\":[\n                {\n                    \"Value\": \"'$MY_IP'\"\n                }\n            ]\n        }\n        }]\n}'\nEOF\nvar/lib/cloud/scripts/per-boot/set-dns\n\n# to inspect what this script did, inspect /var/log/cloud-init-output.log\n\n\nuseradd gherlein\nusermod -G wheel gherlein\necho \"gherlein:none\" | chpasswd\nyum install -y emacs-nox\n# change to allow sudo in the install scripts\necho \"gherlein ALL=(ALL)       NOPASSWD: ALL\" >> /etc/sudoers \nsu -c 'cd ~gherlein;git clone https://github.com/gherlein/gch' gherlein\nsu -c 'cd ~gherlein/gch/;./install' gherlein\n# change it back for safety later\nsed -i.bak '/gherlein/d' /etc/sudoers\nsu -c 'echo \"~/keychain/keychain --eval --agents ssh gherlein-ec2.pem >> ~/.bash_profile\"' gherlein\nsu -c 'echo \"ssh-add ~/keys/gherlein-ec2.pem >> ~/.bash_profile\"' gherlein\n"
         }
       },
       "DependsOn": [
-        "gherleindevrole08982ACD"
+        "devrole61AE7F72"
       ],
       "Metadata": {
-        "aws:cdk:path": "SingleEc2Stack/gherlein-dev/Resource"
+        "aws:cdk:path": "SingleEc2Stack/dev/Resource"
+      }
+    },
+    "tagPollicy47586843": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "ec2:DescribeTags",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:ec2:us-west-2:497939524935:instance/",
+                    {
+                      "Ref": "devF7B884FF"
+                    }
+                  ]
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "tagPollicy47586843",
+        "Roles": [
+          {
+            "Ref": "devrole61AE7F72"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "SingleEc2Stack/tagPollicy/Resource"
       }
     },
     "CDKMetadata": {
       "Type": "AWS::CDK::Metadata",
       "Properties": {
-        "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WPzQrCMBCEn6X3NLUKehV6EE+W+gRhu4X0JymbjSIh726iFPQ07PDNLFPL+nCSu+Ksnq6EfqoCWEIZ7qxgEh066wlQNINpFakFGSkfN8+rZ9FY45g8cPY2OIrcFbRaZOjs/Alvek28MoAt2UHPCUXYp2cInjS/LmT9mrF/Ywv9FsQYhbE9ytFVj/qYVsi6GJ3WJXnDekHZffUN9rgdeeEAAAA="
+        "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WNzQrCMBCEn6X3NDVaPAs9iCdLfYKw3UL6k5RNopSQd7epVPQ0u8PMN4KLsuSH7CJfNod2KAIYQh4eTsLAGrTGEyCrOl1LkhM6pPTcvZu9Y5XR1pEHl7w9HFliBSUnHhozbuVNazMqWDbW97qtAKkBazKdGtcuwnFdR/Ck3HIl4+cU+zf20i8gxsi0aZH3tniKMxcnLrLeKpWT105NyJuPvgGQ/dHf8gAAAA=="
       },
       "Metadata": {
         "aws:cdk:path": "SingleEc2Stack/CDKMetadata/Default"
@@ -132,8 +252,21 @@
     "ec2instanceipaddress": {
       "Value": {
         "Fn::GetAtt": [
-          "gherleindev8B80C16C",
+          "devF7B884FF",
           "PublicIp"
+        ]
+      }
+    },
+    "ec2instanceid": {
+      "Value": {
+        "Ref": "devF7B884FF"
+      }
+    },
+    "ec2instancepublicdnsname": {
+      "Value": {
+        "Fn::GetAtt": [
+          "devF7B884FF",
+          "PublicDnsName"
         ]
       }
     }

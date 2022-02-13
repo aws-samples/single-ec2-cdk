@@ -1,5 +1,5 @@
 {
-  "version": "15.0.0",
+  "version": "16.0.0",
   "artifacts": {
     "Tree": {
       "type": "cdk:tree",
@@ -12,26 +12,27 @@
       "environment": "aws://497939524935/us-west-2",
       "properties": {
         "templateFile": "SingleEc2Stack.template.json",
-        "validateOnSynth": false
+        "validateOnSynth": false,
+        "stackName": "SingleEc2Stack-dev"
       },
       "metadata": {
-        "/SingleEc2Stack/gherlein-dev-role/Resource": [
+        "/SingleEc2Stack/dev-role/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "gherleindevrole08982ACD",
+            "data": "devrole61AE7F72",
             "trace": [
-              "new Role (/Users/gherlein/src/chime/single-ec2/node_modules/@aws-cdk/aws-iam/lib/role.ts:201:18)",
-              "new SingleEc2Stack (/Users/gherlein/src/chime/single-ec2/lib/single-ec2-stack.ts:29:18)",
-              "Object.<anonymous> (/Users/gherlein/src/chime/single-ec2/bin/single-ec2.ts:23:1)",
+              "new Role (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/@aws-cdk/aws-iam/lib/role.ts:201:18)",
+              "new SingleEc2Stack (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/lib/single-ec2-stack.ts:53:18)",
+              "Object.<anonymous> (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/bin/single-ec2.ts:7:1)",
               "Module._compile (node:internal/modules/cjs/loader:1101:14)",
-              "Module.m._compile (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module.m._compile (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/index.ts:1056:23)",
               "Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
-              "Object.require.extensions.<computed> [as .ts] (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/index.ts:1059:12)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/index.ts:1059:12)",
               "Module.load (node:internal/modules/cjs/loader:981:32)",
               "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
               "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)",
-              "main (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/bin.ts:198:14)",
-              "Object.<anonymous> (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/bin.ts:288:3)",
+              "main (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/bin.ts:288:3)",
               "Module._compile (node:internal/modules/cjs/loader:1101:14)",
               "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
               "Module.load (node:internal/modules/cjs/loader:981:32)",
@@ -41,23 +42,23 @@
             ]
           }
         ],
-        "/SingleEc2Stack/gherlein-devsg/Resource": [
+        "/SingleEc2Stack/dnsPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "gherleindevsg28F9A818",
+            "data": "dnsPolicy90BE57CE",
             "trace": [
-              "new SecurityGroup (/Users/gherlein/src/chime/single-ec2/node_modules/@aws-cdk/aws-ec2/lib/security-group.ts:272:26)",
-              "new SingleEc2Stack (/Users/gherlein/src/chime/single-ec2/lib/single-ec2-stack.ts:35:27)",
-              "Object.<anonymous> (/Users/gherlein/src/chime/single-ec2/bin/single-ec2.ts:23:1)",
+              "new Policy (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/@aws-cdk/aws-iam/lib/policy.ts:89:22)",
+              "new SingleEc2Stack (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/lib/single-ec2-stack.ts:77:23)",
+              "Object.<anonymous> (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/bin/single-ec2.ts:7:1)",
               "Module._compile (node:internal/modules/cjs/loader:1101:14)",
-              "Module.m._compile (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module.m._compile (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/index.ts:1056:23)",
               "Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
-              "Object.require.extensions.<computed> [as .ts] (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/index.ts:1059:12)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/index.ts:1059:12)",
               "Module.load (node:internal/modules/cjs/loader:981:32)",
               "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
               "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)",
-              "main (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/bin.ts:198:14)",
-              "Object.<anonymous> (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/bin.ts:288:3)",
+              "main (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/bin.ts:288:3)",
               "Module._compile (node:internal/modules/cjs/loader:1101:14)",
               "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
               "Module.load (node:internal/modules/cjs/loader:981:32)",
@@ -67,23 +68,23 @@
             ]
           }
         ],
-        "/SingleEc2Stack/gherlein-dev/InstanceProfile": [
+        "/SingleEc2Stack/ssmPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "gherleindevInstanceProfileA43B603F",
+            "data": "ssmPolicy178E7BD0",
             "trace": [
-              "new Instance (/Users/gherlein/src/chime/single-ec2/node_modules/@aws-cdk/aws-ec2/lib/instance.ts:167:24)",
-              "new SingleEc2Stack (/Users/gherlein/src/chime/single-ec2/lib/single-ec2-stack.ts:58:22)",
-              "Object.<anonymous> (/Users/gherlein/src/chime/single-ec2/bin/single-ec2.ts:23:1)",
+              "new Policy (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/@aws-cdk/aws-iam/lib/policy.ts:89:22)",
+              "new SingleEc2Stack (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/lib/single-ec2-stack.ts:95:23)",
+              "Object.<anonymous> (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/bin/single-ec2.ts:7:1)",
               "Module._compile (node:internal/modules/cjs/loader:1101:14)",
-              "Module.m._compile (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module.m._compile (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/index.ts:1056:23)",
               "Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
-              "Object.require.extensions.<computed> [as .ts] (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/index.ts:1059:12)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/index.ts:1059:12)",
               "Module.load (node:internal/modules/cjs/loader:981:32)",
               "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
               "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)",
-              "main (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/bin.ts:198:14)",
-              "Object.<anonymous> (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/bin.ts:288:3)",
+              "main (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/bin.ts:288:3)",
               "Module._compile (node:internal/modules/cjs/loader:1101:14)",
               "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
               "Module.load (node:internal/modules/cjs/loader:981:32)",
@@ -93,23 +94,75 @@
             ]
           }
         ],
-        "/SingleEc2Stack/gherlein-dev/Resource": [
+        "/SingleEc2Stack/devsg/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "gherleindev8B80C16C",
+            "data": "devsg25C5920B",
             "trace": [
-              "new Instance (/Users/gherlein/src/chime/single-ec2/node_modules/@aws-cdk/aws-ec2/lib/instance.ts:202:21)",
-              "new SingleEc2Stack (/Users/gherlein/src/chime/single-ec2/lib/single-ec2-stack.ts:58:22)",
-              "Object.<anonymous> (/Users/gherlein/src/chime/single-ec2/bin/single-ec2.ts:23:1)",
+              "new SecurityGroup (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/@aws-cdk/aws-ec2/lib/security-group.ts:272:26)",
+              "new SingleEc2Stack (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/lib/single-ec2-stack.ts:100:27)",
+              "Object.<anonymous> (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/bin/single-ec2.ts:7:1)",
               "Module._compile (node:internal/modules/cjs/loader:1101:14)",
-              "Module.m._compile (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module.m._compile (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/index.ts:1056:23)",
               "Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
-              "Object.require.extensions.<computed> [as .ts] (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/index.ts:1059:12)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/index.ts:1059:12)",
               "Module.load (node:internal/modules/cjs/loader:981:32)",
               "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
               "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)",
-              "main (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/bin.ts:198:14)",
-              "Object.<anonymous> (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/bin.ts:288:3)",
+              "main (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/SingleEc2Stack/dev/InstanceProfile": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devInstanceProfile2C058DB1",
+            "trace": [
+              "new Instance (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/@aws-cdk/aws-ec2/lib/instance.ts:167:24)",
+              "new SingleEc2Stack (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/lib/single-ec2-stack.ts:128:22)",
+              "Object.<anonymous> (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/bin/single-ec2.ts:7:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Module.m._compile (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)",
+              "main (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/SingleEc2Stack/dev/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "devF7B884FF",
+            "trace": [
+              "new Instance (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/@aws-cdk/aws-ec2/lib/instance.ts:202:21)",
+              "new SingleEc2Stack (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/lib/single-ec2-stack.ts:128:22)",
+              "Object.<anonymous> (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/bin/single-ec2.ts:7:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Module.m._compile (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)",
+              "main (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/bin.ts:288:3)",
               "Module._compile (node:internal/modules/cjs/loader:1101:14)",
               "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
               "Module.load (node:internal/modules/cjs/loader:981:32)",
@@ -124,22 +177,48 @@
             "type": "aws:cdk:logicalId",
             "data": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter",
             "trace": [
-              "Function.fromStringParameterAttributes (/Users/gherlein/src/chime/single-ec2/node_modules/@aws-cdk/aws-ssm/lib/parameter.ts:194:9)",
-              "Function.valueForTypedStringParameter (/Users/gherlein/src/chime/single-ec2/node_modules/@aws-cdk/aws-ssm/lib/parameter.ts:245:17)",
-              "lookupImage (/Users/gherlein/src/chime/single-ec2/node_modules/@aws-cdk/aws-ec2/lib/machine-image.ts:407:27)",
-              "AmazonLinuxImage.getImage (/Users/gherlein/src/chime/single-ec2/node_modules/@aws-cdk/aws-ec2/lib/machine-image.ts:210:21)",
-              "new Instance (/Users/gherlein/src/chime/single-ec2/node_modules/@aws-cdk/aws-ec2/lib/instance.ts:172:44)",
-              "new SingleEc2Stack (/Users/gherlein/src/chime/single-ec2/lib/single-ec2-stack.ts:58:22)",
-              "Object.<anonymous> (/Users/gherlein/src/chime/single-ec2/bin/single-ec2.ts:23:1)",
+              "Function.fromStringParameterAttributes (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/@aws-cdk/aws-ssm/lib/parameter.ts:194:9)",
+              "Function.valueForTypedStringParameter (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/@aws-cdk/aws-ssm/lib/parameter.ts:246:17)",
+              "lookupImage (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/@aws-cdk/aws-ec2/lib/machine-image.ts:435:27)",
+              "AmazonLinuxImage.getImage (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/@aws-cdk/aws-ec2/lib/machine-image.ts:229:21)",
+              "new Instance (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/@aws-cdk/aws-ec2/lib/instance.ts:172:44)",
+              "new SingleEc2Stack (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/lib/single-ec2-stack.ts:128:22)",
+              "Object.<anonymous> (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/bin/single-ec2.ts:7:1)",
               "Module._compile (node:internal/modules/cjs/loader:1101:14)",
-              "Module.m._compile (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module.m._compile (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/index.ts:1056:23)",
               "Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
-              "Object.require.extensions.<computed> [as .ts] (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/index.ts:1059:12)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/index.ts:1059:12)",
               "Module.load (node:internal/modules/cjs/loader:981:32)",
               "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
               "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)",
-              "main (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/bin.ts:198:14)",
-              "Object.<anonymous> (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/bin.ts:288:3)",
+              "main (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/SingleEc2Stack/tagPollicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "tagPollicy47586843",
+            "trace": [
+              "new Policy (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/@aws-cdk/aws-iam/lib/policy.ts:89:22)",
+              "new SingleEc2Stack (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/lib/single-ec2-stack.ts:159:23)",
+              "Object.<anonymous> (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/bin/single-ec2.ts:7:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Module.m._compile (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)",
+              "main (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/bin.ts:288:3)",
               "Module._compile (node:internal/modules/cjs/loader:1101:14)",
               "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
               "Module.load (node:internal/modules/cjs/loader:981:32)",
@@ -154,17 +233,67 @@
             "type": "aws:cdk:logicalId",
             "data": "ec2instanceipaddress",
             "trace": [
-              "new SingleEc2Stack (/Users/gherlein/src/chime/single-ec2/lib/single-ec2-stack.ts:77:5)",
-              "Object.<anonymous> (/Users/gherlein/src/chime/single-ec2/bin/single-ec2.ts:23:1)",
+              "new SingleEc2Stack (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/lib/single-ec2-stack.ts:176:5)",
+              "Object.<anonymous> (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/bin/single-ec2.ts:7:1)",
               "Module._compile (node:internal/modules/cjs/loader:1101:14)",
-              "Module.m._compile (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module.m._compile (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/index.ts:1056:23)",
               "Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
-              "Object.require.extensions.<computed> [as .ts] (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/index.ts:1059:12)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/index.ts:1059:12)",
               "Module.load (node:internal/modules/cjs/loader:981:32)",
               "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
               "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)",
-              "main (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/bin.ts:198:14)",
-              "Object.<anonymous> (/Users/gherlein/src/chime/single-ec2/node_modules/ts-node/src/bin.ts:288:3)",
+              "main (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/SingleEc2Stack/ec2-instance-id": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ec2instanceid",
+            "trace": [
+              "new SingleEc2Stack (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/lib/single-ec2-stack.ts:179:5)",
+              "Object.<anonymous> (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/bin/single-ec2.ts:7:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Module.m._compile (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)",
+              "main (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/SingleEc2Stack/ec2-instance-public-dnsname": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ec2instancepublicdnsname",
+            "trace": [
+              "new SingleEc2Stack (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/lib/single-ec2-stack.ts:182:5)",
+              "Object.<anonymous> (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/bin/single-ec2.ts:7:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1101:14)",
+              "Module.m._compile (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:981:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:822:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)",
+              "main (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/ts-node/src/bin.ts:288:3)",
               "Module._compile (node:internal/modules/cjs/loader:1101:14)",
               "Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)",
               "Module.load (node:internal/modules/cjs/loader:981:32)",
@@ -179,18 +308,18 @@
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata",
             "trace": [
-              "new MetadataResource (/Users/gherlein/src/chime/single-ec2/node_modules/@aws-cdk/core/lib/private/metadata-resource.ts:22:24)",
-              "/Users/gherlein/src/chime/single-ec2/node_modules/@aws-cdk/core/lib/private/synthesis.ts:166:5",
-              "visit (/Users/gherlein/src/chime/single-ec2/node_modules/@aws-cdk/core/lib/private/synthesis.ts:231:5)",
-              "visit (/Users/gherlein/src/chime/single-ec2/node_modules/@aws-cdk/core/lib/private/synthesis.ts:227:5)",
-              "injectMetadataResources (/Users/gherlein/src/chime/single-ec2/node_modules/@aws-cdk/core/lib/private/synthesis.ts:157:3)",
-              "Object.synthesize (/Users/gherlein/src/chime/single-ec2/node_modules/@aws-cdk/core/lib/private/synthesis.ts:18:3)",
-              "App.synth (/Users/gherlein/src/chime/single-ec2/node_modules/@aws-cdk/core/lib/stage.ts:94:23)",
-              "process.<anonymous> (/Users/gherlein/src/chime/single-ec2/node_modules/@aws-cdk/core/lib/app.ts:64:45)",
+              "new MetadataResource (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/@aws-cdk/core/lib/private/metadata-resource.ts:22:24)",
+              "/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/@aws-cdk/core/lib/private/synthesis.ts:166:5",
+              "visit (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/@aws-cdk/core/lib/private/synthesis.ts:231:5)",
+              "visit (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/@aws-cdk/core/lib/private/synthesis.ts:227:5)",
+              "injectMetadataResources (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/@aws-cdk/core/lib/private/synthesis.ts:157:3)",
+              "Object.synthesize (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/@aws-cdk/core/lib/private/synthesis.ts:18:3)",
+              "App.synth (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/@aws-cdk/core/lib/stage.ts:94:23)",
+              "process.<anonymous> (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/@aws-cdk/core/lib/app.ts:64:45)",
               "Object.onceWrapper (node:events:510:26)",
               "process.emit (node:events:390:28)",
               "process.emit (node:domain:475:12)",
-              "process.emit (/Users/gherlein/src/chime/single-ec2/node_modules/source-map-support/source-map-support.js:516:21)"
+              "process.emit (/Users/gherlein/src/chime/dev/us-west-2/single-ec2-cdk/node_modules/source-map-support/source-map-support.js:516:21)"
             ]
           }
         ]

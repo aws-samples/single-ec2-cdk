@@ -9,7 +9,7 @@
         "path": "Tree",
         "constructInfo": {
           "fqn": "@aws-cdk/core.Construct",
-          "version": "1.137.0"
+          "version": "1.144.0"
         }
       },
       "SingleEc2Stack": {
@@ -25,7 +25,7 @@
                 "path": "SingleEc2Stack/VPC/PublicSubnet1",
                 "constructInfo": {
                   "fqn": "@aws-cdk/core.Resource",
-                  "version": "1.137.0"
+                  "version": "1.144.0"
                 }
               },
               "PublicSubnet2": {
@@ -33,7 +33,7 @@
                 "path": "SingleEc2Stack/VPC/PublicSubnet2",
                 "constructInfo": {
                   "fqn": "@aws-cdk/core.Resource",
-                  "version": "1.137.0"
+                  "version": "1.144.0"
                 }
               },
               "PublicSubnet3": {
@@ -41,7 +41,7 @@
                 "path": "SingleEc2Stack/VPC/PublicSubnet3",
                 "constructInfo": {
                   "fqn": "@aws-cdk/core.Resource",
-                  "version": "1.137.0"
+                  "version": "1.144.0"
                 }
               },
               "PublicSubnet4": {
@@ -49,22 +49,22 @@
                 "path": "SingleEc2Stack/VPC/PublicSubnet4",
                 "constructInfo": {
                   "fqn": "@aws-cdk/core.Resource",
-                  "version": "1.137.0"
+                  "version": "1.144.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "@aws-cdk/core.Resource",
-              "version": "1.137.0"
+              "version": "1.144.0"
             }
           },
-          "gherlein-dev-role": {
-            "id": "gherlein-dev-role",
-            "path": "SingleEc2Stack/gherlein-dev-role",
+          "dev-role": {
+            "id": "dev-role",
+            "path": "SingleEc2Stack/dev-role",
             "children": {
               "Resource": {
                 "id": "Resource",
-                "path": "SingleEc2Stack/gherlein-dev-role/Resource",
+                "path": "SingleEc2Stack/dev-role/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::IAM::Role",
                   "aws:cdk:cloudformation:props": {
@@ -84,27 +84,121 @@
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-iam.CfnRole",
-                  "version": "1.137.0"
+                  "version": "1.144.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "@aws-cdk/aws-iam.Role",
-              "version": "1.137.0"
+              "version": "1.144.0"
             }
           },
-          "gherlein-devsg": {
-            "id": "gherlein-devsg",
-            "path": "SingleEc2Stack/gherlein-devsg",
+          "dnsPolicy": {
+            "id": "dnsPolicy",
+            "path": "SingleEc2Stack/dnsPolicy",
             "children": {
               "Resource": {
                 "id": "Resource",
-                "path": "SingleEc2Stack/gherlein-devsg/Resource",
+                "path": "SingleEc2Stack/dnsPolicy/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                  "aws:cdk:cloudformation:props": {
+                    "policyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "route53:GetChange",
+                          "Effect": "Allow",
+                          "Resource": "arn:aws:route53:::hostedzone/Z00609272L7MZI1OMD0IL"
+                        },
+                        {
+                          "Action": "route53:ChangeResourceRecordSets",
+                          "Effect": "Allow",
+                          "Resource": "arn:aws:route53:::hostedzone/Z00609272L7MZI1OMD0IL"
+                        },
+                        {
+                          "Action": "route53:GetHostedZone",
+                          "Effect": "Allow",
+                          "Resource": "arn:aws:route53:::hostedzone/Z00609272L7MZI1OMD0IL"
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "policyName": "dnsPolicy90BE57CE",
+                    "roles": [
+                      {
+                        "Ref": "devrole61AE7F72"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                  "version": "1.144.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-iam.Policy",
+              "version": "1.144.0"
+            }
+          },
+          "ssmPolicy": {
+            "id": "ssmPolicy",
+            "path": "SingleEc2Stack/ssmPolicy",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "SingleEc2Stack/ssmPolicy/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                  "aws:cdk:cloudformation:props": {
+                    "policyDocument": {
+                      "Statement": [
+                        {
+                          "Action": [
+                            "ssm:UpdateInstanceInformation",
+                            "ssmmessages:CreateControlChannel",
+                            "ssmmessages:CreateDataChannel",
+                            "ssmmessages:OpenControlChannel",
+                            "ssmmessages:OpenDataChannel"
+                          ],
+                          "Effect": "Allow",
+                          "Resource": "*"
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "policyName": "ssmPolicy178E7BD0",
+                    "roles": [
+                      {
+                        "Ref": "devrole61AE7F72"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                  "version": "1.144.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-iam.Policy",
+              "version": "1.144.0"
+            }
+          },
+          "devsg": {
+            "id": "devsg",
+            "path": "SingleEc2Stack/devsg",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "SingleEc2Stack/devsg/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
                   "aws:cdk:cloudformation:props": {
-                    "groupDescription": "SingleEc2Stack/gherlein-devsg",
-                    "groupName": "gherlein-dev-sg",
+                    "groupDescription": "SingleEc2Stack/devsg",
+                    "groupName": "dev-sg",
                     "securityGroupEgress": [
                       {
                         "cidrIp": "0.0.0.0/0",
@@ -119,20 +213,6 @@
                         "fromPort": 22,
                         "toPort": 22,
                         "description": "from 0.0.0.0/0:22"
-                      },
-                      {
-                        "cidrIp": "0.0.0.0/0",
-                        "ipProtocol": "tcp",
-                        "fromPort": 80,
-                        "toPort": 80,
-                        "description": "from 0.0.0.0/0:80"
-                      },
-                      {
-                        "cidrIp": "0.0.0.0/0",
-                        "ipProtocol": "tcp",
-                        "fromPort": 443,
-                        "toPort": 443,
-                        "description": "from 0.0.0.0/0:443"
                       }
                     ],
                     "vpcId": "vpc-34c1924c"
@@ -140,56 +220,64 @@
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-ec2.CfnSecurityGroup",
-                  "version": "1.137.0"
+                  "version": "1.144.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "@aws-cdk/aws-ec2.SecurityGroup",
-              "version": "1.137.0"
+              "version": "1.144.0"
             }
           },
-          "gherlein-dev": {
-            "id": "gherlein-dev",
-            "path": "SingleEc2Stack/gherlein-dev",
+          "dev": {
+            "id": "dev",
+            "path": "SingleEc2Stack/dev",
             "children": {
               "InstanceProfile": {
                 "id": "InstanceProfile",
-                "path": "SingleEc2Stack/gherlein-dev/InstanceProfile",
+                "path": "SingleEc2Stack/dev/InstanceProfile",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::IAM::InstanceProfile",
                   "aws:cdk:cloudformation:props": {
                     "roles": [
                       {
-                        "Ref": "gherleindevrole08982ACD"
+                        "Ref": "devrole61AE7F72"
                       }
                     ]
                   }
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-iam.CfnInstanceProfile",
-                  "version": "1.137.0"
+                  "version": "1.144.0"
                 }
               },
               "Resource": {
                 "id": "Resource",
-                "path": "SingleEc2Stack/gherlein-dev/Resource",
+                "path": "SingleEc2Stack/dev/Resource",
                 "attributes": {
                   "aws:cdk:cloudformation:type": "AWS::EC2::Instance",
                   "aws:cdk:cloudformation:props": {
                     "availabilityZone": "us-west-2a",
+                    "blockDeviceMappings": [
+                      {
+                        "deviceName": "/dev/xvda",
+                        "ebs": {
+                          "volumeSize": 100
+                        }
+                      }
+                    ],
                     "iamInstanceProfile": {
-                      "Ref": "gherleindevInstanceProfileA43B603F"
+                      "Ref": "devInstanceProfile2C058DB1"
                     },
                     "imageId": {
                       "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
                     },
-                    "instanceType": "t2.micro",
+                    "instanceType": "t3.2xlarge",
                     "keyName": "gherlein-ec2",
                     "securityGroupIds": [
                       {
                         "Fn::GetAtt": [
-                          "gherleindevsg28F9A818",
+                          "devsg25C5920B",
                           "GroupId"
                         ]
                       }
@@ -197,24 +285,52 @@
                     "subnetId": "subnet-b342eecb",
                     "tags": [
                       {
+                        "key": "domainName",
+                        "value": "herlein.dev"
+                      },
+                      {
+                        "key": "ec2Name",
+                        "value": "dev"
+                      },
+                      {
+                        "key": "hostedZoneID",
+                        "value": "Z00609272L7MZI1OMD0IL"
+                      },
+                      {
+                        "key": "keyFile",
+                        "value": "~/keys/gherlein-ec2.pem"
+                      },
+                      {
+                        "key": "keyName",
+                        "value": "gherlein-ec2"
+                      },
+                      {
                         "key": "Name",
-                        "value": "gherlein-dev"
+                        "value": "dev"
+                      },
+                      {
+                        "key": "nickName",
+                        "value": "dev"
+                      },
+                      {
+                        "key": "timeBomb",
+                        "value": "0"
                       }
                     ],
                     "userData": {
-                      "Fn::Base64": "#!/bin/bash\n#! /bin/bash\nsudo yum -y update\nsudo yum -y install expect emacs-nox jq\ncurl \"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip\" -o \"awscliv2.zip\"\nunzip awscliv2.zip\nsudo ./aws/install\nrm -Rf aws\ncurl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash\ncat << EOF >> $HOME/.bash_profile\nexport NVM_DIR=\"$HOME/.nvm\"\n[ -s \"$NVM_DIR/nvm.sh\" ] && \\. \"$NVM_DIR/nvm.sh\"  # This loads nvm\n[ -s \"$NVM_DIR/bash_completion\" ] && \\. \"$NVM_DIR/bash_completion\"\nEOF\nsource $HOME/.bash_profile\nnvm install 16\nnvm use 16\nnpm install -g npm nodejs typescript aws-sdk aws-cdk\n\n\n"
+                      "Fn::Base64": "#!/bin/bash\n#! /bin/bash -x\n# install critial tools\nsudo yum -y update\nsudo yum remove -y awscli # remove v1 to make way to install v2\nsudo yum -y install expect jq curl git\n# install AWS CLI\nwget \"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip\" -O \"awscliv2.zip\"\nunzip awscliv2.zip\nsudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update\nrm -Rf aws awscliv2.zip\n# install SAM\nwget https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip -O sam.zip\nunzip sam.zip  -d sam-installation\nsudo ./sam-installation/install\nsam --version\nrm -Rf ./sam-installation sam.zip\n# install NVM\nexport HOME=/usr/local/bin\ncd /usr/local/bin\ncurl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash\ncat << \"EOF\" >> /etc/profile\nNVM_DIR=/usr/local/bin/.nvm\n[ -s \"$NVM_DIR/nvm.sh\" ] && \\. \"$NVM_DIR/nvm.sh\"  # This loads nvm\n[ -s \"$NVM_DIR/bash_completion\" ] && \\. \"$NVM_DIR/bash_completion\"\nfor i in $(ls $HOME/.ssh/*.pem);\ndo\n    [ -f \"$i\" ] || break\n    ssh-add $i\ndone\nEOF\nsource /etc/profile\nsource $NVM_DIR/nvm.sh\nnvm install 16\nnvm use 16\nnpm install -g npm nodejs typescript aws-sdk aws-cdk yarn\nexport HOME=/root\n# set local variables\nINSTANCE_ID=$(wget -qO- http://instance-data/latest/meta-data/instance-id)\nHOST=`aws ec2 describe-tags --filters \"Name=resource-id,Values=$INSTANCE_ID\" \"Name=key,Values=nickName\" | jq -r .Tags[].Value`\nDOMAIN=`aws ec2 describe-tags --filters \"Name=resource-id,Values=$INSTANCE_ID\" \"Name=key,Values=domainName\" | jq -r .Tags[].Value`\necho \"preserve_hostname: true\" >> /etc/cloud/cloud.cfg\nhostnamectl set-hostname $HOST.$DOMAIN\necho \"ssh-add $KEYFILE\" >> /etc/profile\n# configure DNS\ntouch /var/lib/cloud/scripts/per-boot/set-dns\nchmod +x /var/lib/cloud/scripts/per-boot/set-dns\ncat << \"EOF\" > /var/lib/cloud/scripts/per-boot/set-dns\n#!/bin/bash\nINSTANCE_ID=$(wget -qO- http://instance-data/latest/meta-data/instance-id)\nMY_IP=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4/)\nDOMAIN=`aws ec2 describe-tags --filters \"Name=resource-id,Values=$INSTANCE_ID\" \"Name=key,Values=domainName\" | jq -r .Tags[].Value`\nHOST=`aws ec2 describe-tags --filters \"Name=resource-id,Values=$INSTANCE_ID\" \"Name=key,Values=nickName\" | jq -r .Tags[].Value`\nFQDN=$HOST.$DOMAIN\n/usr/local/bin/aws route53 change-resource-record-sets --hosted-zone-id Z00609272L7MZI1OMD0IL --change-batch '{\n    \"Changes\":[{\n        \"Action\":\"UPSERT\",\n        \"ResourceRecordSet\":{\n            \"Name\": \"'$FQDN'\",\n            \"Type\":\"A\",\n            \"TTL\":10,\n            \"ResourceRecords\":[\n                {\n                    \"Value\": \"'$MY_IP'\"\n                }\n            ]\n        }\n        }]\n}'\nEOF\nvar/lib/cloud/scripts/per-boot/set-dns\n\n# to inspect what this script did, inspect /var/log/cloud-init-output.log\n\n\nuseradd gherlein\nusermod -G wheel gherlein\necho \"gherlein:none\" | chpasswd\nyum install -y emacs-nox\n# change to allow sudo in the install scripts\necho \"gherlein ALL=(ALL)       NOPASSWD: ALL\" >> /etc/sudoers \nsu -c 'cd ~gherlein;git clone https://github.com/gherlein/gch' gherlein\nsu -c 'cd ~gherlein/gch/;./install' gherlein\n# change it back for safety later\nsed -i.bak '/gherlein/d' /etc/sudoers\nsu -c 'echo \"~/keychain/keychain --eval --agents ssh gherlein-ec2.pem >> ~/.bash_profile\"' gherlein\nsu -c 'echo \"ssh-add ~/keys/gherlein-ec2.pem >> ~/.bash_profile\"' gherlein\n"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-ec2.CfnInstance",
-                  "version": "1.137.0"
+                  "version": "1.144.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "@aws-cdk/aws-ec2.Instance",
-              "version": "1.137.0"
+              "version": "1.144.0"
             }
           },
           "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter": {
@@ -222,7 +338,7 @@
             "path": "SingleEc2Stack/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter",
             "constructInfo": {
               "fqn": "@aws-cdk/core.CfnParameter",
-              "version": "1.137.0"
+              "version": "1.144.0"
             }
           },
           "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118": {
@@ -230,7 +346,56 @@
             "path": "SingleEc2Stack/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118",
             "constructInfo": {
               "fqn": "@aws-cdk/core.Resource",
-              "version": "1.137.0"
+              "version": "1.144.0"
+            }
+          },
+          "tagPollicy": {
+            "id": "tagPollicy",
+            "path": "SingleEc2Stack/tagPollicy",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "SingleEc2Stack/tagPollicy/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                  "aws:cdk:cloudformation:props": {
+                    "policyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "ec2:DescribeTags",
+                          "Effect": "Allow",
+                          "Resource": {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:aws:ec2:us-west-2:497939524935:instance/",
+                                {
+                                  "Ref": "devF7B884FF"
+                                }
+                              ]
+                            ]
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "policyName": "tagPollicy47586843",
+                    "roles": [
+                      {
+                        "Ref": "devrole61AE7F72"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                  "version": "1.144.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-iam.Policy",
+              "version": "1.144.0"
             }
           },
           "ec2-instance-ip-address": {
@@ -238,7 +403,23 @@
             "path": "SingleEc2Stack/ec2-instance-ip-address",
             "constructInfo": {
               "fqn": "@aws-cdk/core.CfnOutput",
-              "version": "1.137.0"
+              "version": "1.144.0"
+            }
+          },
+          "ec2-instance-id": {
+            "id": "ec2-instance-id",
+            "path": "SingleEc2Stack/ec2-instance-id",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnOutput",
+              "version": "1.144.0"
+            }
+          },
+          "ec2-instance-public-dnsname": {
+            "id": "ec2-instance-public-dnsname",
+            "path": "SingleEc2Stack/ec2-instance-public-dnsname",
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.CfnOutput",
+              "version": "1.144.0"
             }
           },
           "CDKMetadata": {
@@ -250,25 +431,25 @@
                 "path": "SingleEc2Stack/CDKMetadata/Default",
                 "constructInfo": {
                   "fqn": "@aws-cdk/core.CfnResource",
-                  "version": "1.137.0"
+                  "version": "1.144.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "@aws-cdk/core.Construct",
-              "version": "1.137.0"
+              "version": "1.144.0"
             }
           }
         },
         "constructInfo": {
           "fqn": "@aws-cdk/core.Stack",
-          "version": "1.137.0"
+          "version": "1.144.0"
         }
       }
     },
     "constructInfo": {
       "fqn": "@aws-cdk/core.App",
-      "version": "1.137.0"
+      "version": "1.144.0"
     }
   }
 }

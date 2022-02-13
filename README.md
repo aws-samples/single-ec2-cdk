@@ -19,10 +19,6 @@ script to create users and install softare in that users home directory.  Please
 
 Please note that if you just need a development machine at a low cost, or, you want/need to have a very strong security posture, it is possible to run an EC2 instance without a public IP address and connect only over Amazon System Manager (SSM).  [Here is a good blog about it](https://pub.towardsai.net/how-to-do-remote-development-with-vs-code-using-aws-ssm-415881d249f3).  This tool could be modified to support that.  This tool does set the IAM policy to enable the use of SSM.  However, this tool assumes that you want/need to be able to connect to the host over the internet.
 
-## Cloning This Repo
-
-We assume you will "use this template" to create a new GitHub repository with your own name.  You can then edit your configuration (see below) and track your changes in git as well, and customize the scripts as needed for your own use.
-
 ## Software Installed by Default
 
 In addition to several basic tools, the following software will be installed on the target EC2 host:
@@ -44,12 +40,20 @@ You can easily expand what is installed by writing a script and setting the user
 ## Why Not Use Cloud9 or Amazon Workspaces?
 
 [Cloud9](https://aws.amazon.com/cloud9/) is a great tool.  So is [https://www.amazonaws.cn/en/workspaces/](Amazon Workspaces).  However, some customers prefer to use tools like Visual Studio Code, or to ssh to a host and use command line tools.  Or they want to easily change
-the IAM permissions for the host.  Or most importantly, they want to create a "clean" new development environment to start a new project, or to test that their code will work properly on a clean new environment.  Netiher Cloud9 nor the Amazon Workspaces make that easy to do. 
+the IAM permissions for the host.  Or most importantly, they want to create a "clean" new development environment to start a new project, or to test that their code will work properly on a clean new environment, and they don't want to manually set up that environment each time.  Netiher Cloud9 nor the Amazon Workspaces make that easy to do. 
+
+Please note that if you just need a development machine at a low cost, or, you want/need to
+have a very strong security posture, it is possible to run an EC2 instance without a public IP
+address and connect only over Amazon System Manager (SSM).  [Here is a good blog about
+it](https://pub.towardsai.net/how-to-do-remote-development-with-vs-code-using-aws-ssm-415881d249f3).  This tool could be modified to support that.  This tool does set the IAM policy to enable
+the use of SSM.  However, this tool assumes that you want/need to be able to connect to the
+host over the internet.
 
 ## Security Improvements
 
 This script opens port 22 so that you can ssh to the host, from anywhere by default.  You may want to limit the IP addresses that can connect inbound.  You can read about [SSH best practices](https://aws.amazon.com/premiumsupport/knowledge-center/ec2-ssh-best-practices/).
 
+Alternately you could disable port 22 and use SSM (see above).
 
 ## Using this Solution with Visual Studio Code
 
@@ -65,7 +69,8 @@ To run this CDK script to create an EC2 instance, you need to configure your AWS
 aws sts get-caller-identity
 ```
 
-You should get information about your valid AWS account if it is configured properly.
+You should get information about your valid AWS account if it is configured properly.  
+
 ## Installing Application Dependencies (Launch Host)
 
 You need to install the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), [jq](https://stedolan.github.io/jq/download/) and 
@@ -160,8 +165,11 @@ There's a helper script to copy your pem file to the destination host.  You shou
 yarn copykeys
 ```
 
-The helper will also extract your public key from the pem file and write it to your .ssh directory.  You will need to copy that public key to the service you wish to connect to from your EC2 (such as GitHub or GitLab).  The default userdata script will
-add a command to the /etc/profile file to load the pem file into the SSH agent when you log in.  This script is also included as part of the "yarn prep" script.
+The helper will also extract your public key from the pem file and write it to your .ssh directory.  You will need to copy that public key to the service you wish to connect to from your EC2 (such as GitHub or GitLab).  The default userdata script will add a command to the /etc/profile file to load the pem file into the SSH agent when you log in.  This script is also included as part of the "yarn prep" script.
+
+Because EC2 keypairs are specific to a region, this script will also copy the key to every region.  This enables you to deploy the EC2 instance in every region.
+
+
 ## Handling an Error When Using SSH
 
 If something fails and you cannot connect using "ssh <nickname>" you can easily ssh to the host using:
