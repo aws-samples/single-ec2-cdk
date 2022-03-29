@@ -13,7 +13,7 @@ cd <project_root>
 docker build --rm -t chime-ws-dev -f docker/Dockerfile .
  ```
 
- _NOTE_: `user_scfript.sh` will error in setting some of the local variables and DNS entries. However, this may not be needed for all development tasks. If this is important for your work, you may wish to modify `user_script.sh` or simply deploy to EC2.
+ _NOTE_: `user_script.sh` will error in setting some of the local variables and DNS entries. However, this may not be needed for all development tasks. If this is important for your work, you may wish to modify `user_script.sh` or simply deploy to EC2.
 
 ### Run Container with interactive terminal
 
