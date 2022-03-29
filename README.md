@@ -41,6 +41,10 @@ You can easily expand what is installed by writing a script and setting the user
 [Cloud9](https://aws.amazon.com/cloud9/) is a great tool.  So is [Amazon WorkSpaces](https://www.amazonaws.cn/en/workspaces/).  However, some customers prefer to use tools like Visual Studio Code, or to ssh to a host and use command line tools.  Or they want to easily change
 the IAM permissions for the host.  Or most importantly, they want to create a "clean" new development environment to start a new project, or to test that their code will work properly on a clean new environment, and they don't want to manually set up that environment each time.  Netiher Cloud9 nor the Amazon WorkSpaces make that easy to do. 
 
+## Using Local Docker Instead of an EC2
+
+You don't need a separate computer to get a consistent development environment. You can install Docker and use a container to get the same effect.  There are reports that Docker has issues on some MacOS machines, so this may not be a solution for you.  However, if Docker works for you this can be a very easy alternative.  Read [instructions here](docker/DevWithDocker.md) on how to set this up.
+
 ## Security Improvements
 
 This script opens port 22 so that you can ssh to the host, from anywhere by default.  You may want to limit the IP addresses that can connect inbound.  You can read about [SSH best practices](https://aws.amazon.com/premiumsupport/knowledge-center/ec2-ssh-best-practices/).
