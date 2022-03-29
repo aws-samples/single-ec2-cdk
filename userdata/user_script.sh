@@ -5,12 +5,12 @@ sudo yum remove -y awscli # remove v1 to make way to install v2
 sudo yum -y install expect jq curl git
 # install AWS CLI
 wget "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -O "awscliv2.zip"
-unzip awscliv2.zip
+unzip -o awscliv2.zip
 sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
 rm -Rf aws awscliv2.zip
 # install SAM
 wget https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip -O sam.zip
-unzip sam.zip  -d sam-installation
+unzip sam.zip -o -d sam-installation
 sudo ./sam-installation/install
 sam --version
 rm -Rf ./sam-installation sam.zip
@@ -22,18 +22,25 @@ cat << "EOF" >> /etc/profile
 NVM_DIR=/usr/local/bin/.nvm
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-for i in $(ls $HOME/.ssh/*.pem);
+eval `ssh-agent -s`
+for i in $HOME/.ssh/*.pem;
 do
     [ -f "$i" ] || break
     ssh-add $i
 done
 EOF
+
+export HOME=/root
+cat << "EOF" >> $HOME/.bashrc
 source /etc/profile
 source $NVM_DIR/nvm.sh
+EOF
+source $HOME/.bashrc
+
 nvm install 16
 nvm use 16
 npm install -g npm nodejs typescript aws-sdk aws-cdk yarn
-export HOME=/root
+
 # set local variables
 INSTANCE_ID=$(wget -qO- http://instance-data/latest/meta-data/instance-id)
 HOST=`aws ec2 describe-tags --filters "Name=resource-id,Values=$INSTANCE_ID" "Name=key,Values=nickName" | jq -r .Tags[].Value`
