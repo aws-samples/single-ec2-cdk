@@ -1,14 +1,17 @@
+#!/bin/bash
 KEYVAR=`jq -r .keyFile configs/config.json`
 KEYFILE="${KEYVAR//\~/$HOME}"
-PUB=$KEYFILE.pub
+KEYNAME=`jq -r .keyName configs/config.json`
+PUB=$HOME/.ssh/$KEYNAME.pub
+echo "generating public key file $PUB"
 ssh-keygen -y -f $KEYFILE > $PUB
 TARGET=`jq -r .nickName configs/config.json`:.ssh/
 echo ""
 echo "copying $KEYFILE and $PUB to $TARGET"
 scp $KEYFILE $TARGET
 scp $PUB $TARGET
-
-
-
+echo "copying $PUB to all AWS regions"
+AWS_REGIONS="$(aws ec2 describe-regions --query 'Regions[].RegionName' --output text)"
+for each_region in ${AWS_REGIONS} ; do aws ec2 import-key-pair --key-name $KEYNAME --public-key-material fileb://$PUB --region $each_region ; done
 
 

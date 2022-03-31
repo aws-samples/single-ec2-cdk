@@ -5,7 +5,7 @@
     "single-ec2": "bin/single-ec2.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "yarn install && tsc",
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
